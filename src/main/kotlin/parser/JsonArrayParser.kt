@@ -7,7 +7,7 @@ import parser.dsl.parser
 fun jsonArrayParser(): Parser<JsonArray> = parser {
     char('[')
     whitespace()
-    val nodes = many(
+    val nodes = manySeparated(
         elementParser = jsonNodeParser(failOnRemaining = false),
         separatorConsumer = commaConsumer()
     )

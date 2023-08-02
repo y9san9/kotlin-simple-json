@@ -8,7 +8,7 @@ import parser.dsl.parser
 fun jsonObjectParser(): Parser<JsonObject> = parser {
     char('{')
     whitespace()
-    val pairs = many(
+    val pairs = manySeparated(
         elementParser = pairParser(),
         separatorConsumer = commaConsumer()
     )

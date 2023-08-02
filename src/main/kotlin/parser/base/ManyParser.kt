@@ -5,29 +5,18 @@ package parser.base
 import parser.dsl.ParserState
 import parser.dsl.parser
 
-fun <T> manyParser(
-    elementParser: Parser<T>,
-    separatorConsumer: Consumer
-): Parser<List<T>> = parser {
-    val first = elementParser.tryParse().getOrElse { return@parser emptyList() }
-
-    val results: MutableList<T> = mutableListOf(first)
+fun <T> manyParser(elementParser: Parser<T>): Parser<List<T>> = parser {
+    val results: MutableList<T> = mutableListOf()
 
     while (true) {
-        runCatching {
-            separatorConsumer.parse()
-            elementParser.parse()
-        }.onSuccess { result ->
-            results += result
-        }.onFailure {
-            return@parser results
-        }
+        val result = elementParser
+            .tryParse()
+            .getOrElse { return@parser results }
+
+        results += result
     }
 
     fail()
 }
 
-fun <T> ParserState.many(
-    elementParser: Parser<T>,
-    separatorConsumer: Consumer
-): List<T> = manyParser(elementParser, separatorConsumer).parse()
+fun <T> ParserState.many(elementParser: Parser<T>): List<T> = manyParser(elementParser).parse()

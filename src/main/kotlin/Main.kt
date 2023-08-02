@@ -1,6 +1,7 @@
 import ast.JsonNode
 import parser.base.Parser
 import parser.jsonNodeParser
+import parser.jsonStringParser
 
 // Note:
 // Does not support:
@@ -11,6 +12,7 @@ import parser.jsonNodeParser
 fun main() {
     val parser: Parser<JsonNode> = jsonNodeParser()
 
+    // language=json
     val exampleJson = """
         {
             "glossary": {
