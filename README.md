@@ -5,6 +5,8 @@ Simple JSON Parser in Kotlin
 
 This is a simple JSON parser written in Kotlin, intended to demonstrate how a basic JSON parser can be implemented in a straightforward manner. It is designed for educational purposes and is not meant for production use.
 
+Article that describes how the parser works: https://dev.to/y9san9/json-parsing-from-scratch-in-kotlin-4al8
+
 Note
 ----
 
