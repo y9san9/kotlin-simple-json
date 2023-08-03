@@ -10,7 +10,6 @@ Note
 
 Please be aware that this parser has some limitations and does not support the following features:
 
-*   Escaping of special characters
 *   Parsing of floating-point numbers
 *   Detailed error reporting
 
