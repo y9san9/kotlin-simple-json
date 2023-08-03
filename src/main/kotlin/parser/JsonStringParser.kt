@@ -35,14 +35,16 @@ private fun specialCharacters(): Parser<String> = parser {
         charParser('n').map { "\n" },
         charParser('r').map { "\r" },
         charParser('t').map { "\t" },
-        parser {
-            char('u')
-            val code = takeExact(n = 4)
-                .toIntOrNull(radix = 16)
-                ?: fail()
-            Char(code).toString()
-        }
+        unicodeCharacter().string()
     )
+}
+
+private fun unicodeCharacter(): Parser<Char> = parser {
+    char('u')
+    val code = takeExact(n = 4)
+        .toIntOrNull(radix = 16)
+        ?: fail()
+    Char(code)
 }
 
 fun ParserState.jsonString(): JsonString = jsonStringParser().parse()
