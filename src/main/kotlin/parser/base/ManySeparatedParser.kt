@@ -7,17 +7,19 @@ fun <T> manySeparatedParser(
     elementParser: Parser<T>,
     separatorConsumer: Consumer
 ): Parser<List<T>> = parser {
-    val first = elementParser.tryParse().getOrElse { return@parser emptyList() }
+    manySeparated(elementParser, separatorConsumer)
+}
+
+fun <T> ParserState.manySeparated(
+    elementParser: Parser<T>,
+    separatorConsumer: Consumer
+): List<T> {
+    val first = elementParser.tryParse().getOrElse { return emptyList() }
 
     val elementWithSeparator = parser {
         separatorConsumer.parse()
         elementParser.parse()
     }
 
-    listOf(first) + many(elementWithSeparator)
+    return listOf(first) + many(elementWithSeparator)
 }
-
-fun <T> ParserState.manySeparated(
-    elementParser: Parser<T>,
-    separatorConsumer: Consumer
-): List<T> = manySeparatedParser(elementParser, separatorConsumer).parse()

@@ -7,13 +7,13 @@ import parser.dsl.ParserState
 import parser.dsl.parser
 
 fun jsonNodeParser(failOnRemaining: Boolean = true): Parser<JsonNode> = parser {
-    val result = any(
-        jsonPrimitiveParser(),
-        jsonArrayParser(),
-        jsonObjectParser()
-    )
+    val node = jsonNode()
     if (failOnRemaining && source.isNotEmpty()) fail()
-    result
+    node
 }
 
-fun ParserState.jsonNode(): JsonNode = jsonNodeParser(failOnRemaining = false).parse()
+fun ParserState.jsonNode(): JsonNode = any(
+    jsonPrimitiveParser(),
+    jsonArrayParser(),
+    jsonObjectParser()
+)

@@ -16,6 +16,7 @@ fun main() {
         {
             "glossary": {
                 "title": "example glossary",
+                "escape": "\\ \" \/ \b \f \n \r \t \u002D",
                 "pages": 1,
                 "description": null,
                 "GlossDiv": {

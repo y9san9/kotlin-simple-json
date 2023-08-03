@@ -6,12 +6,12 @@ import parser.dsl.parser
 
 inline fun takeWhileParser(
     crossinline predicate: (Char) -> Boolean
-): Parser<String> = parser {
+): Parser<String> = parser { takeWhile(predicate) }
+
+inline fun ParserState.takeWhile(
+    predicate: (Char) -> Boolean
+): String {
     val result = source.takeWhile(predicate)
     discard(result.length)
-    result
+    return result
 }
-
-fun ParserState.takeWhile(
-    predicate: (Char) -> Boolean
-): String = takeWhileParser(predicate).parse()

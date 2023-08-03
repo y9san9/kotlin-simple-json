@@ -1,9 +1,10 @@
 package parser.base
 
 import parser.dsl.ParserState
+import parser.dsl.parser
 
-fun whitespaceConsumer(): Consumer = takeWhileParser { it.isWhitespace() }.consume()
+fun whitespaceConsumer(): Consumer = parser { whitespace() }
 
 fun ParserState.whitespace() {
-    whitespaceConsumer().parse()
+    takeWhile { it.isWhitespace() }
 }
