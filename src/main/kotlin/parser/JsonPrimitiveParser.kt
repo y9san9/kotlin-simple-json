@@ -7,6 +7,7 @@ import parser.base.anyParser
 fun jsonPrimitiveParser(): Parser<JsonPrimitive> = anyParser(
     jsonNullParser(),
     jsonBooleanParser(),
+    jsonFloatParser(),
     jsonIntegerParser(),
     jsonStringParser()
 )

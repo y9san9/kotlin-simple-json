@@ -19,6 +19,7 @@ fun main() {
                 "escape": "\\ \" \/ \b \f \n \r \t \u002D",
                 "pages": 1,
                 "description": null,
+                "stars": 4.2,
                 "GlossDiv": {
                     "id": -1,
                     "title": "S",
